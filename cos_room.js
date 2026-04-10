@@ -291,12 +291,14 @@ function isDoubleUpTime() {
     var day = now.getDay();
     var isWeekend = (day === 0 || day === 6);
     var minutes = now.getHours() * 60 + now.getMinutes();
-    var ranges = isWeekend ? [[30, 360], [780, 900]] : [[30, 419], [720, 900]];
-    var i;
-    for (i = 0; i < ranges.length; i++) {
-        if (minutes >= ranges[i][0] && minutes < ranges[i][1]) return true;
+
+    if (isWeekend) {
+        // 주말: 00:00~05:59 (0~359), 13:00~16:00 (780~960)
+        return (minutes >= 0 && minutes <= 359) || (minutes >= 780 && minutes <= 960);
+    } else {
+        // 평일: 00:00~06:59 (0~419), 12:00~16:00 (720~960)
+        return (minutes >= 0 && minutes <= 419) || (minutes >= 720 && minutes <= 960);
     }
-    return false;
 }
 
 function addPoints(name, base) {
