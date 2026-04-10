@@ -914,7 +914,7 @@ bot.addListener(Event.MESSAGE, function (msg) {
 
     if (content === "!") {
         msg.reply(
-            "📌 채팅봇 기능안내 💬\n"
+            "📌 이한봇 기능안내 💬\n"
             + "출석 기능 안내\n"
             + " • 아침에 채팅치면 자동으로 출석!🎉\n"
             + " • !출석랭킹 – 오늘 출석 목록 📋\n"
