@@ -15,6 +15,7 @@ var FILE_USER_MAP = "user_map.txt";
 var FILE_USER_DATA = "user_data.txt";
 var FILE_ATTENDANCE = "attendance_today.txt";
 var FILE_FORTUNE = "fortune_today.txt";
+var FILE_RECRUIT = "recruit_data.txt";
 
 // 
 //  정적 데이터
@@ -158,14 +159,14 @@ var QUIZ_BANK = [
     { q: "[009] [넌센스] D가 20개씩 있으면 뭘까?", a: ["스무디"], hint: "언 과일과 얼음을 갈아서 먹는 베버리지입니다." },
     { q: "[010] [넌센스] 소가 불에 타면?", a: ["불소"], hint: "치아에 이걸 코팅하면 충치를 예방할 수 있다고 알려져 있습니다." },
     { q: "[011] [넌센스] 호주에서 쓰는 돈은?", a: ["호주머니"], hint: "호주달러는 아닙니다. 호주가 들어가는건 맞아요." },
-    { q: "[012] [넌센스] USA 다음은?", a: ["USB"], hint: "범용직렬버스라고 불리우는 것입니다." },
+    { q: "[012] [넌센스 X IT] USA 다음은?", a: ["USB"], hint: "범용직렬버스라고 불리우는 것입니다." },
     { q: "[013] [넌센스] '성씨가 똑같다'를 3글자로 줄이면?", a: ["성동일"], hint: "유명인 이름입니다." },
     { q: "[014] [넌센스] 혀가 거짓말할 때 쓰는 말은? (붙여서 쓸 것, 기호는 쓰지말것)", a: ["전혀아닙니다"], hint: "극구 부정할 때 쓰는 말이기도 합니다." },
     { q: "[015] [넌센스] 슈퍼주니어 신동 옆에 있으면 뭐라고 할까? (3글자)", a: ["신동엽"], hint: "SNL에 자주 나오는 유명인 이름입니다." },
     { q: "[016] [넌센스] 과자가 자기소개하면? (3글자)", a: ["전과자"], hint: "범죄를 저지른 이력이 있는 사람" },
-    { q: "[017] [넌센스] 소가 공포에 떨면?", a: ["소름", "소오름"], hint: "진짜 __돋네요." },
+    { q: "[017] [IT X 수학] [난이도 최상] 16진수 A 는 10진수로 몇인가?", a: ["10", "열", "십"], hint: "16진수로 B는 10진수로 11입니다." },
     { q: "[018] [넌센스] 입모양이 S자인 사람을 뭐라고 할까? (영어 대문자, 3음절)", a: ["EBS", "이비에스"], hint: "한국교육방송공사의 영어 약어입니다." },
-    { q: "[019] [넌센스] 달에서 쓰는 언어는?", a: ["문어"], hint: "달은 영어로 Moon, 그리고 한자로 語를 붙여보세요." },
+    { q: "[019] [수학] π(파이)는 몇도일까?", a: ["180", "180도"], hint: "원의 둘레를 구하는 공식은 2πr로, 2π는 360도를 뜻합니다." },
     { q: "[020] [IT] macOS 에서는 ctrl(Control) 키를 거의 사용하지 않는데, 그렇다면 ctrl 키 대신 어떤 키를 사용하나?\n보기에서 골라쓰시오.\n\n[보기] Command | Alternative Key (Alt) | Function Key (Fn) | Escape Key (ESC)", a: ["Command", "커멘드", "코멘드"], hint: "Command + C 는 복사입니다." },
     { q: "[021] [넌센스] 양이 돈을 벌어서 내는 세금은 뭘까? (5글자)", a: ["양도소득세"], hint: "재화를 양도할 때 내는 세금입니다." },
     { q: "[022] [넌센스] 할아버지가 등산하면?", a: ["산타할아버지"], hint: "호호호" },
@@ -181,7 +182,7 @@ var QUIZ_BANK = [
     { q: "[032] [IT] EMV Contactless 기반의 비접촉 결제 시스템으로, Apple에서 서비스 하고 있는 결제 서비스는 무엇인가?", a: ["애플페이", "Apple Pay"], hint: "Apple 지갑 앱에서 결제할 수 있는 서비스입니다." },
     { q: "[033] [IT] UNIX 기반의 휴대전화용 OS로서, Apple社의 iPhone에 탑재된 OS의 이름은 무엇인가?", a: ["iOS", "아이오에스", "iPhoneOS"], hint: "옛 이름은 iPhone OS 입니다." },
     { q: "[034] [IT] Linux 기반의 오픈소스 휴대전화용 OS로서, 현재는 Google이 인수하여 서비스하고 있는 OS의 이름은 무엇인가?", a: ["Android", "안드로이드"], hint: "삼성 갤럭시에 탑재된 모바일 기기 운영체제 이름입니다." },
-    { q: "[035] [헌터X헌터] 키르아 조르딕이 속한 가문은 대대로 어떤 직업을 가업으로 삼고 있나?", a: ["암살자", "암살"], hint: "가족 구성원 전원이 초일류 실력을 갖춘 집단입니다." },
+    { q: "[035] [영어 X IT] What is the name of the app we are currently chatting on?", a: ["KakaoTalk", "카카오톡", "카톡"], hint: "번역: 우리 지금 무슨 앱으로 채팅치고 있나요?" },
     { q: "[036] [헌터X헌터] 주인공 '곤 프릭스'의 고향인 섬의 이름?", a: ["고래섬", "쿠지라지마"], hint: "곤이 미토 이모와 함께 자란 곳으로, 낚시하기 좋은 자연환경을 가지고 있습니다." },
     { q: "[037] [헌터X헌터] 곤 프릭스의 아버지이자 전설적인 헌터인 이 사람의 이름은?", a: ["진 프릭스", "진"], hint: "그리드 아일랜드의 제작자 중 한 명이며 전 십이지 멤버입니다." },
     { q: "[038] [헌터X헌터] 넨의 계통을 판별하기 위해 물이 든 컵에 잎사귀를 띄우고 수행하는 의식은?", a: ["수견식", "미즈미루시키"], hint: "물의 변화(맛, 불순물, 양 등)를 통해 자신의 계통을 확인합니다." },
@@ -194,7 +195,7 @@ var QUIZ_BANK = [
     { q: "[045] [헌터X헌터] 넨의 응용 기술 중 하나로, 몸 주위에 오라를 둘러 방어력을 높이는 기술은?", a: ["켄"], hint: "'전'과 '연'을 복합적으로 사용하여 전신을 보호하는 상태입니다." },
     { q: "[046] [헌터X헌터] 제287기 헌터 시험에서 곤이 달았던 수험 번호는?", a: ["405", "405번"], hint: "키르아는 99번, 크라피카는 404번이었습니다." },
     { q: "[047] [헌터X헌터] 조르딕 가문의 집사 중 한 명으로, 동전을 총탄처럼 튕겨 공격하는 인물은?", a: ["고토", "고트"], hint: "키르아를 매우 아끼며, 히소카와의 전투에서 활약했습니다." },
-    { q: "[048] [헌터X헌터] 전 헌터 협회 회장 아이작 네테로의 최강 기술로, 거대한 관음상을 소환하는 능력은?", a: ["백식관음", "햐쿠시키칸논"], hint: "메르엠과의 전투에서 사용했으며, 기술을 쓸 때마다 감사의 기도를 올립니다." },
+    { q: "[048] [철도] 인천역에서 출발하여 서울 영등포역까지 이어지는 이 노선의 이름은 무엇인가?", a: ["경인선"], hint: "대한민국 최초의 철도노선이며, 서울 경(京) + 어질/인천 인(仁)을 따서 만든 노선입니다." },
     { q: "[049] [헌터X헌터] 키르아가 넨을 전기로 변화시켜 자신의 신체 능력을 한계까지 끌어올리는 기술의 명칭은?", a: ["신속", "칸무루"], hint: "'전광석화'와 '질풍신뢰'라는 두 가지 파생 기술이 있습니다." },
     { q: "[050] [헌터X헌터] 넨의 4대 행 중 하나로, 몸 밖으로 흐르는 오라를 신체 내부에 머물게 하여 생기를 유지하는 기술은?", a: ["전", "텐"], hint: "방어의 기본이며 이를 익히면 노화를 늦추는 효과도 있습니다." },
     { q: "[051] [헌터X헌터] 환영여단의 멤버 페이탄이 사용하는 능력으로, 받은 데미지를 열에너지로 바꿔 방출하는 기술은?", a: ["라이징 선", "태양에 불타라", "라이징선", "라이싱선"], hint: "자이잔(사잔)과의 전투에서 사용해 강력한 광범위 공격을 퍼부었습니다." },
@@ -207,25 +208,26 @@ var QUIZ_BANK = [
     { q: "[058] [헌터X헌터] 환영여단의 마치 가 사용하는 넨 능력을 이용한 실의 명칭은?", a: ["넨사", "넨 실"], hint: "부러진 팔을 접합하거나 적을 구속하는 등 다용도로 활용되는 오라의 실입니다." },
     { q: "[059] [헌터X헌터] 환영여단의 멤버 중 '행운의 이름표'를 이용해 타인을 조종하는 조작계 능력자는?", a: ["샤르나크"], hint: "여단의 브레인 중 한 명이며, 휴대전화를 매개체로 능력을 발동합니다." },
     { q: "[060] [헌터X헌터] 키메라 앤트 편에서 네테로 회장과 함께 궁전에 침입한 인물로, 연기를 조종하는 능력을 가진 헌터는?", a: ["모라우", "모라우 맥카나시"], hint: "거대한 파이프를 무기로 사용하며 '딥 퍼플'이라는 기술을 구사합니다." },
-    { q: "[061] [IT] 웹사이트에서 페이지를 찾을 수 없을 때 뜨는 오류 코드로, KiiKii(키키)가 해당 노래로 큰 이슈를 끈 바 있다. 400번대 오류코드인데, 정확한 코드는 몇 번인가? (400~404 중 하나 선택)", a: ["404", "404번"], hint: "객관식은 힌트를 제공하지 않아요." },
+    { q: "[061] [IT] 웹사이트에서 페이지를 찾을 수 없을 때 뜨는 오류 코드로, KiiKii(키키)가 해당 코드를 기반하여 만든 노래로 큰 이슈를 끈 바 있다. 400번대 오류코드인데, 정확한 코드는 몇 번인가? (400~404 중 하나 선택)", a: ["404", "404번"], hint: "객관식은 힌트를 제공하지 않아요." },
     { q: "[062] [헌터X헌터] 키메라 앤트 왕의 직속 호위군 중 한 명으로, 거대한 고양이 귀를 가진 특질계 능력자는?", a: ["네페르피트", "피트"], hint: "닥터 브라이스라는 인형을 소환해 수술이나 수복을 할 수 있습니다." },
     { q: "[063] [헌터X헌터] 넨의 응용 기술 중, 오라를 눈에 집중시켜 보이지 않는 넨을 간파하는 기술은?", a: ["교"], hint: "히소카의 '깜짝 텍스처'나 '번지껌'을 간파하기 위해 필수적인 기술입니다." },
     { q: "[064] [IT] Compact Disk 의 약자로서, 원판에 레이저로 정보를 저장하고 읽는 매체를 무엇이라고 하는가?", a: ["CD", "씨디"], hint: "이 매체에다가 기록하는 행위를 '버닝' (굽기) 라고 합니다. 사실 Compact Disk의 이니셜을 쓰면 그게 정답입니다." },
     { q: "[065] [헌터X헌터] 환영여단 멤버 우보긴을 죽음으로 몰고 간 크라피카의 사슬 기술 명칭은?", a: ["자박하는 중지의 쇠사슬", "체인 제일"], hint: "여단 멤버에게만 사용한다는 제약을 걸어 강도를 극한으로 높인 기술입니다." },
     { q: "[066] [헌터X헌터] 헌터 시험 제4차 시험지였던 섬의 이름은?", a: ["제빌섬"], hint: "번호표 빼앗기 서바이벌이 진행되었으며, 곤이 히소카의 번호표를 낚아챘던 장소입니다." },
     { q: "[067] [헌터X헌터] 곤과 키르아의 스승이자, 본모습은 거구의 근육질 여성이지만 소녀의 모습을 하고 있는 인물은?", a: ["비스켓 크루거", "비스케"], hint: "그리드 아일랜드에서 두 사람에게 넨의 기초와 응용을 가르쳤습니다." },
-    { q: "[068] [IT X 수학] [난이도 최상] 16진수 F 는 10진수로 몇인가?", a: ["15", "십오"], hint: "16진수로 E는 10진수로 14 입니다." },
+    { q: "[068] [IT X 수학] [난이도 최상] 16진수 F 는 10진수로 몇인가?", a: ["15", "십오", "열다섯"], hint: "16진수로 E는 10진수로 14 입니다." },
     { q: "[069] [IT] 보조기억장치의 종류 중 하나로, 여러 겹의 딱딱한 원판(Disk)에 자석 신호로 정보를 저장하는 매체는 무엇인가?", a: ["하드디스크드라이브", "HDD", "하드", "하드디스크"], hint: "딱딱한 (Hard) 원판(Disk) 저장매체(Drive)" },
     { q: "[070] [IT] 이한봇이 사용하고 있는 스크립트 언어로, 이 언어는 무엇인가? 보기에서 골라 답하시오.\n\n[보기] JavaScript | Java | Python", a: ["JS", "자바스크립트", "JavaScirpt"], hint: "보기가 제공된 문제에서는 힌트를 제공하지 않습니다." }
 ];
 
-// 
 //  런타임 상태
-// 
 var userMap = {};   // { hash → { name, updatedAt } }
 var userData = {};   // { hash → { chat, lastChatAt, point, attend, attendRanks[], quizCorrect } }
 var attendance = { dateKey: "", list: [] };  // { dateKey, list: [{hash, time}] }
 var fortune = { dateKey: "", data: {} };  // { dateKey, data: {hash → fortune} }
+
+// 팀코 및 트윈
+var recruit = { list: [] };
 
 // 퀴즈 런타임
 var quizActive = false;
@@ -267,14 +269,13 @@ function dbWrite(file, obj) {
     try { Database.writeString(file, JSON.stringify(obj)); } catch (e) { /* ignore */ }
 }
 
-// 
 //  데이터 로드 / 저장
-// 
 function loadAll() {
     userMap = dbRead(FILE_USER_MAP, {});
     userData = dbRead(FILE_USER_DATA, {});
     attendance = dbRead(FILE_ATTENDANCE, { dateKey: "", list: [] });
     fortune = dbRead(FILE_FORTUNE, { dateKey: "", data: {} });
+    recruit = dbRead(FILE_RECRUIT, { list: [] });  // ← { list: [] } 로 변경
 }
 
 function saveUserMap() { dbWrite(FILE_USER_MAP, userMap); }
@@ -470,7 +471,7 @@ function startQuizRound(msg) {
         return;
     }
     if (quizActive) {
-        msg.reply("이미 퀴즈가 진행 중입니다.\n'!정답 (내용)' 으로 정답을 제출하세요!");
+        msg.reply("이미 퀴즈가 진행 중입니다.\n'정답 (내용)' 으로 정답을 제출하세요!");
         return;
     }
 
@@ -496,7 +497,7 @@ function startQuizRound(msg) {
     quizAnswered = {};
     usedQuizIds[idx] = true;
 
-    msg.reply("🧩 퀴즈 시작!\nQ. " + currentQuiz.q + "\n\n[ !정답 (내용) | !힌트 | !종료 ]");
+    msg.reply("🧩 퀴즈 시작!\nQ. " + currentQuiz.q + "\n\n[ 정답 (내용) | !힌트 | !종료 ]");
 }
 
 function stopQuiz(msg, text) {
@@ -514,7 +515,7 @@ function submitAnswer(hash, displayName, payload, msg) {
         msg.reply("지금은 진행 중인 퀴즈가 없습니다. '!퀴즈'로 시작해보세요!"); return;
     }
     ans = (payload || "").replace(/^\s+|\s+$/g, "");
-    if (!ans) { msg.reply("정답 형식: '!정답 (내용)'"); return; }
+    if (!ans) { msg.reply("정답 형식: '정답 (내용)'"); return; }
     if (quizAnswered[hash]) { msg.reply(displayName + " 님은 이미 이번 문제를 맞히셨습니다!"); return; }
 
     for (i = 0; i < currentQuiz.a.length; i++) {
@@ -670,6 +671,83 @@ function proxyAttendByName(query, msg) {
 }
 
 // 
+//  모집 게시판 (팀코 / 트윈)
+// 
+
+function saveRecruit() { dbWrite(FILE_RECRUIT, recruit); }
+
+function nextRecruitCode() {
+    var list = recruit.list;
+    var max = 0, i, n;
+    for (i = 0; i < list.length; i++) {
+        n = parseInt(list[i].code, 10);
+        if (n > max) max = n;
+    }
+    var next = max + 1;
+    var s = "" + next;
+    while (s.length < 4) s = "0" + s;
+    return s;
+}
+
+function addRecruit(type, content, msg) {
+    // type: "TWIN" | "TEAMCOS"
+    var code = nextRecruitCode();
+    recruit.list.push({ code: code, type: type, content: content });
+    saveRecruit();
+    var label = (type === "TWIN") ? "트윈" : "팀코";
+    msg.reply("✅ " + label + " 모집이 등록되었어요!\n코드: " + code + "\n유형: " + type + "\n내용: " + content);
+}
+
+function listRecruit(type, msg) {
+    // type: "TWIN" | "TEAMCOS" | null (전체)
+    var all = recruit.list;
+    var filtered = [], i;
+    for (i = 0; i < all.length; i++) {
+        if (!type || all[i].type === type) filtered.push(all[i]);
+    }
+    var label = type === "TWIN" ? "트윈" : type === "TEAMCOS" ? "팀코" : "📋 전체";
+    if (!filtered.length) {
+        msg.reply(label + " 모집 중인 항목이 없어요. 😢\n등록은 관리자(이한)에게 문의해주세요!");
+        return;
+    }
+    var out = label + " 모집중!!\n———————————————\n", item;
+    for (i = 0; i < filtered.length; i++) {
+        item = filtered[i];
+        out += "[" + item.code + "]" + "\n" + item.content;
+        if (i < filtered.length - 1) out += "\n———————————————\n";
+    }
+    msg.reply(out);
+}
+
+function deleteRecruitByCode(code, msg) {
+    var norm = (code + "").replace(/^\s+|\s+$/g, "");
+    while (norm.length < 4) norm = "0" + norm;
+    var list = recruit.list;
+    var newList = [], i, found = false, foundItem;
+    for (i = 0; i < list.length; i++) {
+        if (list[i].code === norm) { found = true; foundItem = list[i]; }
+        else { newList.push(list[i]); }
+    }
+    if (!found) { msg.reply("⚠️ [" + norm + "] 코드에 해당하는 항목이 없습니다."); return; }
+    recruit.list = newList;
+    saveRecruit();
+    msg.reply("✅ [" + norm + "] [" + foundItem.type + "] 항목을 삭제했습니다.\n내용: " + foundItem.content);
+}
+
+function clearRecruit(type, msg) {
+    // type: "TWIN" | "TEAMCOS" | null (전체)
+    var list = recruit.list;
+    var newList = [], i;
+    for (i = 0; i < list.length; i++) {
+        if (type && list[i].type !== type) newList.push(list[i]);
+    }
+    recruit.list = newList;
+    saveRecruit();
+    var label = type === "TWIN" ? "트윈" : type === "TEAMCOS" ? "팀코" : "전체";
+    msg.reply("✅ " + label + " 모집 목록을 초기화했습니다.");
+}
+
+// 
 //  메인 리스너
 // 
 bot.addListener(Event.MESSAGE, function (msg) {
@@ -702,6 +780,11 @@ bot.addListener(Event.MESSAGE, function (msg) {
                 + "!!데이터초기화   – 전체 유저 데이터 초기화\n"
                 + "!!운세초기화     – 오늘 운세 초기화\n"
                 + "!!퀴즈초기화     – 퀴즈 정답 기록 초기화\n"
+                + "!!팀코등록 (내용)     – 팀코 항목 등록\n"
+                + "!!트윈등록 (내용)     – 트윈 항목 등록\n"
+                + "!!모집삭제 (코드)     – 코드로 항목 삭제\n"
+                + "!!팀코전체초기화     – 팀코 목록 전체 삭제\n"
+                + "!!트윈전체초기화     – 트윈 목록 전체 삭제\n"
                 + "!!매핑초기화     – 해시↔닉네임 매핑 초기화 (신중!)\n"
                 + "!!전체초기화     – 매핑 제외 전체 초기화"
             );
@@ -753,6 +836,27 @@ bot.addListener(Event.MESSAGE, function (msg) {
             msg.reply("✅ 퀴즈 정답 기록을 초기화했어요."); return;
         }
 
+        if (content.indexOf("!!팀코등록 ") === 0) {
+            var tcContent = content.substring("!!팀코등록 ".length).replace(/^\s+|\s+$/g, "");
+            if (!tcContent) { msg.reply("사용법: !!팀코등록 (내용)"); return; }
+            addRecruit("TEAMCOS", tcContent, msg); return;
+        }
+
+        if (content.indexOf("!!트윈등록 ") === 0) {
+            var twContent = content.substring("!!트윈등록 ".length).replace(/^\s+|\s+$/g, "");
+            if (!twContent) { msg.reply("사용법: !!트윈등록 (내용)"); return; }
+            addRecruit("TWIN", twContent, msg); return;
+        }
+
+        if (content.indexOf("!!모집삭제 ") === 0) {
+            var delCode = content.substring("!!모집삭제 ".length).replace(/^\s+|\s+$/g, "");
+            if (!delCode) { msg.reply("사용법: !!모집삭제 (코드)"); return; }
+            deleteRecruitByCode(delCode, msg); return;
+        }
+
+        if (content === "!!팀코전체초기화") { clearRecruit("TEAMCOS", msg); return; }
+        if (content === "!!트윈전체초기화") { clearRecruit("TWIN", msg); return; }
+
         if (content === "!!매핑초기화") {
             userMap = {};
             saveUserMap();
@@ -790,8 +894,8 @@ bot.addListener(Event.MESSAGE, function (msg) {
     //  퀴즈 진행 중: 퀴즈 관련 외 명령 차단 
     if (quizActive) {
         if (content.indexOf("!") === 0) {
-            if (content.indexOf("!정답") === 0) {
-                submitAnswer(senderHash, displayName, content.replace(/^!정답\s*/, ""), msg); return;
+            if (content.indexOf("정답") === 0) {
+                submitAnswer(senderHash, displayName, content.replace(/^정답\s*/, ""), msg); return;
             }
             if (content === "!힌트") {
                 msg.reply("💡 힌트: " + currentQuiz.hint); return;
@@ -799,9 +903,33 @@ bot.addListener(Event.MESSAGE, function (msg) {
             if (content === "!종료") {
                 stopQuiz(msg, "🛑 퀴즈를 종료했습니다."); return;
             }
-            msg.reply("⛔️ 퀴즈 진행 중입니다.\n퀴즈 중에는 !정답 / !힌트 / !종료 만 사용 가능합니다."); return;
+            msg.reply("⛔️ 퀴즈 진행 중입니다.\n퀴즈 중에는 정답 / !힌트 / !종료 만 사용 가능합니다."); return;
         }
     }
+
+    //  !트윈 / !팀코 목록 조회
+    if (content === "!트윈") { listRecruit("TWIN", msg); return; }
+    if (content === "!팀코") { listRecruit("TEAMCOS", msg); return; }
+
+    //  !모집양식
+    if (content === "!모집양식" || content === "/팀코홍보" || content === "/팀코홍보 ") {
+        msg.reply(
+            "[팀코 / 트윈 모집 양식]\n"
+            + "(여기에 내용 입력)\n"
+            + "모집자: (예: 이한)\n"
+            + "대상: (예: 2003년 이후 출생의 남성만 여성만 성별무관)\n"
+            + "시기: (예: 12서코 토요일)\n\n"
+            + "‼️꼭 읽어주세요‼️\n"
+            + " - 이 양식을 길게 눌러 복사 후 양식에 맞춰 작성해주세요.\n"
+            + " - 예시 및 '꼭 읽어주세요' 내용은 전부 지우고 작성하세요.\n"
+            + " - 등록 시 @이한 멘션 필수입니다. (안하면 등록이 누락됨)\n"
+            + " - 부적절한 내용이 포함된 경우 관리자가 임의 수정할 수 있습니다.\n"
+            + " - 수정이 절대로 불가하므로 신중히 작성해주세요\n"
+            + " - 시기경과/마감/부적절한 내용 등의 사유가 있는 글은 관리자가 임의로 삭제/수정/거부할 수 있습니다."
+        );
+        return;
+    }
+
 
     //  !출석 (강제 출석) 
     if (content === "!출석") {
@@ -920,8 +1048,8 @@ bot.addListener(Event.MESSAGE, function (msg) {
         msg.reply("💡 힌트: " + currentQuiz.hint); return;
     }
 
-    if (content.indexOf("!정답") === 0) {
-        submitAnswer(senderHash, displayName, content.replace(/^!정답\s*/, ""), msg); return;
+    if (content.indexOf("정답") === 0) {
+        submitAnswer(senderHash, displayName, content.replace(/^정답\s*/, ""), msg); return;
     }
 
     if (content === "!종료") {
@@ -970,7 +1098,6 @@ bot.addListener(Event.MESSAGE, function (msg) {
         ensureUser(senderHash);
         var u = userData[senderHash];
 
-        // 날짜가 바뀌면 횟수 초기화
         if (u.drawDate !== today) {
             u.drawCount = 0;
             u.drawDate = today;
@@ -984,25 +1111,65 @@ bot.addListener(Event.MESSAGE, function (msg) {
 
         u.drawCount += 1;
         var remaining = 5 - u.drawCount;
-        var isWin = (Math.floor(Math.random() * 10) === 0); // 10분의 1 확률
+        var roll = Math.random() * 100; // 0 ~ 100
 
-        if (isWin) {
-            u.point += 10;
-            saveUserData();
-            msg.reply(
-                "🎊 축하합니다, " + displayName + " 님!\n"
-                + "뽑기에서 당첨되셨어요! 🎉\n"
-                + "(+10점 적립)\n\n"
-                + "오늘 남은 뽑기 횟수: " + remaining + "회"
-            );
+        var grade, earnedPoint, gradeMsg;
+
+        if (roll < 0.1) {
+            grade = "ANOTHER GRADE";
+            earnedPoint = 200;
+            gradeMsg = "🌟✨ ANOTHER GRADE ✨🌟\n" + displayName + " 님, 대박! 전설의 등급을 뽑으셨어요!!";
+        } else if (roll < 1.1) {
+            grade = "1등";
+            earnedPoint = 100;
+            gradeMsg = "🥇 1등 당첨!\n" + displayName + " 님, 엄청난 행운이에요!";
+        } else if (roll < 6.1) {
+            grade = "2등";
+            earnedPoint = 20;
+            gradeMsg = "🥈 2등 당첨!\n" + displayName + " 님, 꽤 괜찮은 행운이에요!";
+        } else if (roll < 16.1) {
+            grade = "3등";
+            earnedPoint = 10;
+            gradeMsg = "🥉 3등 당첨!\n" + displayName + " 님, 좋은 결과네요!";
+        } else if (roll < 36.1) {
+            grade = "4등";
+            earnedPoint = 5;
+            gradeMsg = displayName + " 님, 4등 당첨!\n작은 행운이 찾아왔어요.";
         } else {
-            saveUserData();
-            msg.reply(
-                "😔 꽝! " + displayName + " 님\n"
-                + "이번엔 운이 따르지 않았네요...\n\n"
-                + "오늘 남은 뽑기 횟수: " + remaining + "회"
-            );
+            grade = "5등 (꽝)";
+            earnedPoint = 0;
+            gradeMsg = displayName + " 님 😔 꽝...\n다음엔 좋은 결과가 있을 거예요!";
         }
+
+        u.point += earnedPoint;
+        saveUserData();
+
+        var resultMsg = gradeMsg + "\n\n";
+        if (earnedPoint > 0) {
+            resultMsg += "획득 점수: +" + earnedPoint + "점\n";
+        } else {
+            resultMsg += "(채팅 점수만 적립됩니다)\n";
+        }
+        resultMsg += "오늘 남은 뽑기 횟수: " + remaining + "회";
+
+        msg.reply(resultMsg);
+        return;
+    }
+
+    // !뽑기확률
+    if (content === "!뽑기확률") {
+        msg.reply(
+            "🎰 뽑기 확률 안내\n"
+            + "———————————————\n"
+            + "🌟 ANOTHER GRADE – 0.1% (+200점)\n"
+            + "🥇 1등 – 1% (+100점)\n"
+            + "🥈 2등 – 5% (+20점)!\n"
+            + "🥉 3등 – 10% (+10점)\n"
+            + "4등 – 20% (+5점)\n"
+            + "5등 – 63.9% (꽝, 채팅 점수만 적립)\n"
+            + "———————————————\n"
+            + "하루 최대 5회 도전 가능"
+        );
         return;
     }
 
@@ -1015,7 +1182,7 @@ bot.addListener(Event.MESSAGE, function (msg) {
     if (content === "!안녕" || content === "!안녕하세요" || content === "/억지응답") {
         msg.reply("(왜인지는 모르겠지만 이 메시지에 응답을 해야할 것 같다는 느낌이 든다)"); return;
     }
-    if (content === "!생존확인" || content === "!생존신고" || content === "JAVA_HOME") {
+    if (content === "!생존확인" || content === "!생존신고" || content === "java") {
         msg.reply("이 메시지가 전송된다면 살아있다는 것 입니다."); return;
     }
     if (content === "!코스" || content === "!코스프레" || content === "cos") {
@@ -1026,6 +1193,10 @@ bot.addListener(Event.MESSAGE, function (msg) {
     if (content === "!") {
         msg.reply(
             "📌 이한봇 기능안내 💬\n\n"
+            + "서로 어울리기!\n"
+            + " • !트윈 – 트윈 모집 정보\n"
+            + " • !팀코 – 팀코 모집 정보\n"
+            + " • !모집양식 – 트윈/팀코 홍보신청양식\n\n"
             + "출석하기\n"
             + " • 아침에 채팅치면 자동으로 출석! 🎉\n"
             + " • !출석랭킹 – 오늘 출석 순서 📋\n"
@@ -1037,11 +1208,12 @@ bot.addListener(Event.MESSAGE, function (msg) {
             + "랜덤의 맛\n"
             + " • !밥 / !디저트 – 음식 추천 🍽️🍰\n"
             + " • !명언 / !운세 – 명언 또는 오늘의 운세 🔮\n"
-            + " • !뽑기 – 10분의 1 확률 행운 뽑기 🎰 (하루 5회)\n\n"
+            + " • !뽑기 – 행운 뽑기 🎰 (하루 5회)\n"
+            + " • !뽑기확률 – 당첨 확률 고지\n\n"
             + "퀴즈\n"
             + " • !퀴즈 – 퀴즈 시작\n"
             + " • !퀴즈랭킹 – 퀴즈 정답 누적 랭킹 🏆\n\n"
-            + "문제 발생 시 관리자에게 문의해주세요. (v5.2)"
+            + "문제 발생 시 관리자에게 문의해주세요. (v5.5)"
         );
         return;
     }
@@ -1090,7 +1262,7 @@ bot.addListener(Event.MESSAGE, function (msg) {
 // 
 bot.addListener(Event.ACTIVITY_CREATE, function (activity) {
     var tv = new android.widget.TextView(activity);
-    tv.setText("CosBot v5.1");
+    tv.setText("CosBot v5.5");
     tv.setTextColor(android.graphics.Color.DKGRAY);
     activity.setContentView(tv);
 });
