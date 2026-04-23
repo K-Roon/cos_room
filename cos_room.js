@@ -6,7 +6,7 @@
 var bot = BotManager.getCurrentBot();
 
 // 버전, 정보, 관리자상수화 등
-var VERSION = "5.6";
+var VERSION = "5.6.1";
 var TARGET_ROOM = "코스어가 되어버려✨";
 var ADMIN_NAMES = ["권재현", "한유"];
 
@@ -190,35 +190,34 @@ var QUIZ_BANK = [
     { q: "[040] [IT X 수학] [난이도 최상] 16진수 F 는 10진수로 몇인가?", a: ["15", "십오", "열다섯"], hint: "16진수로 E는 10진수로 14 입니다." },
     { q: "[041] [IT] 보조기억장치의 종류 중 하나로, 여러 겹의 딱딱한 원판(Disk)에 자석 신호로 정보를 저장하는 매체는 무엇인가?", a: ["하드디스크드라이브", "HDD", "하드", "하드디스크"], hint: "딱딱한 (Hard) 원판(Disk) 저장매체(Drive)" },
     { q: "[042] [IT] 이한봇이 사용하고 있는 스크립트 언어로, 이 언어는 무엇인가? 보기에서 골라 답하시오.\n\n[보기] JavaScript | Java | Python", a: ["JS", "자바스크립트", "JavaScirpt"], hint: "보기가 제공된 문제에서는 힌트를 제공하지 않습니다." },
-    { q: "[042] [헌터X헌터]곤과 키르아가 천공격투장에서 만난 스승으로, '심원류' 권법의 사범 대리인 인물은?", a: ["윙", "Wing"], hint: "정돈되지 않은 셔츠 자락이 특징이며, 넨의 기초를 가르쳐주었습니다." },
-    { q: "[043] [헌터X헌터]키르아의 동생(혹은 형제)으로, 무엇이든 들어주는 '조르기'와 '명령' 능력을 가진 인물은?", a: ["아르카", "아르카 조르딕", "나니카", "Alluka"], hint: "키르아가 목숨을 걸고 가문에서 데려온 소중한 존재입니다." },
-    { q: "[044] [헌터X헌터]그리드 아일랜드(G.I)에서 곤과 키르아의 수행을 도운, 귀여운 외모 속에 근육질 본모습을 숨긴 스승은?", a: ["비스케", "비스킷", "비스킷 크루거", "Bisky"], hint: "변화계 능력자로, '매지컬 에스테' 능력을 사용합니다." },
-    { q: "[045] [헌터X헌터]개미편에서 왕 메르엠과 '군기'를 두며 교감을 나누었던 눈먼 소녀의 이름은?", a: ["코무기", "Komugi"], hint: "군기의 세계 챔피언으로, 왕의 심경 변화에 큰 영향을 미칩니다." },
-    { q: "[046] [헌터X헌터]네테로 회장의 넨 능력으로, 거대한 불상을 소환해 공격하는 기술의 이름은?", a: ["백식관음", "햐쿠시키칸논"], hint: "기도를 통해 공격의 기점을 만드는 강력한 방어 및 공격기입니다." },
-    { q: "[047] [헌터X헌터]곤의 필살기인 '짜잔권(자잔켄)' 중 전신 발산형 공격에 해당하는 계통은?", a: ["방출계", "파", "Paper"], hint: "손바닥을 펴서 장풍처럼 넨을 쏘아냅니다." },
-    { q: "[048] [헌터X헌터]키르아가 신속(간무루) 상태에서 사용하는 기술로, 적의 살기에 반응해 몸이 자동으로 움직이는 것은?", a: ["질풍신뢰", "싯푸진라이"], hint: "뇌의 명령을 거치지 않고 신경계로 직접 반응하는 초고속 회피/반격기입니다." },
-    { q: "[049] [헌터X헌터]환영여단의 멤버 중, 시체나 물건의 '복사본'을 만드는 능력을 가진 인물은?", a: ["콜토피", "코르토피", "Kortopi"], hint: "긴 머리카락으로 얼굴을 가리고 있으며, 여단 내에서 비전투원 역할을 주로 수행합니다." },
-    { q: "[050] [헌터X헌터]헌터 시험관 중 한 명이자 암살 가문의 집사로, 코인(동전)을 총알처럼 던지는 인물은?", a: ["고토", "Gotoh"], hint: "키르아를 매우 아끼던 조르딕 가문의 집사장급 인물입니다." },
-    { q: "[051] [헌터X헌터]개미편의 키메라 앤트 중, 왕의 3전사 중 하나로 '테르프시코라'라는 꼭두각시 능력을 쓰는 자는?", a: ["피트", "네페르피트", "Pitou"], hint: "고양이의 모습을 한 특질계 능력자로, 카이토를 죽음에 이르게 했습니다." },
-    { q: "[052] [헌터X헌터]카이토가 사용하는 넨 능력으로, 1번부터 9번까지 무작위로 무기가 정해지는 능력의 이름은?", a: ["미친 피에로", "크레이지 슬롯", "Crazy Slots"], hint: "피에로 모양의 장치가 입을 열어 무기를 뱉어냅니다." },
-    { q: "[053] [헌터X헌터]조르딕 가문의 저택 입구에 있는, 무게에 따라 열리는 거대한 문의 이름은?", a: ["시험의 문", "황천의 문", "Testing Gate"], hint: "암살 가문의 일원이 되기 위해 반드시 열어야 하는 문입니다." },
-    { q: "[054] [헌터X헌터]그리드 아일랜드의 최종 보스격 인물로, 폭탄을 설치하는 '게더' 능력을 사용한 자는?", a: ["겐스루", "폭탄마", "보머", "Genthru"], hint: "해방(리리스)이라는 키워드로 폭발을 일으킵니다." },
-    { q: "[055] [헌터X헌터]네테로 회장이 죽기 직전 사용한, 몸 안에 심어둔 소형 핵병기의 이름은?", a: ["미니어처 로즈", "가난한 자의 장미", "The Rose"], hint: "엄청난 살상력과 함께 강력한 독성(방사능)을 지닌 무기입니다." },
-    { q: "[056] [헌터X헌터]환영여단 내에서 고문을 담당하며, '태양(라이징 선)'이라는 강력한 광역 공격기를 쓰는 인물은?", a: ["페이탄", "페이탄 포토오", "Feitan"], hint: "검은 옷에 가려진 얼굴과 낮은 목소리가 특징인 변화계 능력자입니다." },
-    { q: "[057] [헌터X헌터]요크신 시티 경매에서 크라피카가 지켰던, 사람의 신체 일부를 수집하는 고용주의 딸은?", a: ["네온", "네온 노스트라드", "Neon"], hint: "백 퍼센트 적중하는 시 쓰기 예언 능력을 가지고 있었습니다." },
-    { q: "[058] [헌터X헌터]넨의 4대 행 중, 몸 밖으로 흐르는 기를 멈추어 가두는 기술은?", a: ["절", "제츠", "Zetsu"], hint: "기척을 숨기거나 피로를 회복할 때 사용합니다." },
-    { q: "[059] [헌터X헌터]헌터 시험 287기에서 합격한 인물로, 곤, 키르아, 쿠라피카와 함께 합격한 나머지 한 명은?", a: ["레오리오", "레오리오 파라디나이트", "Leorio"], hint: "의사가 되기 위해 헌터가 되려는 의리파 청년입니다." },
-    { q: "[060] [헌터X헌터]암흑 대륙에서 온 오행(五害) 중 하나로, 안개상 생물인 '가스 생명체'의 이름은?", a: ["아이", "Ai"], hint: "나니카의 정체로 추정되는 생명체입니다." },
-    { q: "[061] [헌터X헌터]메르엠을 지키는 3전사 중 한 명으로, 수많은 눈을 만들고 날개 가루로 최면을 거는 인물은?", a: ["푸후", "샤와푸후", "Pouf"], hint: "바이올린을 연주하며 왕에게 절대적인 충성을 보입니다." },
-    { q: "[062] [헌터X헌터]천공격투장에서 히소카가 사용한 기술로, 넨을 얇은 실처럼 만들어 고무와 껌의 성질을 갖게 하는 것은?", a: ["번지껌", "Bungee Gum"], hint: "히소카가 어린 시절 좋아했던 풍선껌 이름에서 따왔습니다." },
-    { q: "[063] [헌터X헌터]진 프릭스가 제작한 게임 '그리드 아일랜드'를 플레이하기 위해 필요한 게임기 이름은?", a: ["조이스테이션", "Joystation"], hint: "현실 세계에는 단 100대만 존재하는 희귀한 게임기입니다." },
-    { q: "[064] [헌터X헌터]환영여단 멤버 중 실을 사용하여 상처를 꿰매거나 적을 구속하는 인물은?", a: ["마치", "마치 코마치네", "Machi"], hint: "히소카의 팔을 고쳐준 적이 있는 냉정한 성격의 여성입니다." },
-    { q: "[065] [헌터X헌터]넨 능력 중 자신의 오라를 문장이나 조건으로 바꾸어 타인에게 강요하는 기술을 무엇이라 하는가?", a: ["제약과 서약", "제약", "서약"], hint: "쿠라피카가 환영여단을 상대하기 위해 사용한 방식입니다." },
-    { q: "[066] [헌터X헌터]곤의 아버지 진 프릭스가 속했던, 헌터 협회의 간부 모임의 명칭은?", a: ["십이지", "준이신", "Zodiacs"], hint: "네테로 회장이 인정한 12명의 정예 헌터들입니다." },
-    { q: "[067] [헌터X헌터]키메라 앤트 편에서 곤이 피트를 쓰러뜨리기 위해 강제로 성장했을 때의 팬들 사이 별명은?", a: ["곤육몬", "어른 곤", "제약 곤"], hint: "엄청난 길이의 머리카락과 근육질 몸매가 특징입니다." },
-    { q: "[068] [헌터X헌터]히소카의 등 번호이자, 헌터 시험 당시 그가 달고 있던 번호표의 숫자는?", a: ["44", "44번"], hint: "죽음을 상징하는 숫자와 연관이 깊습니다." },
-    { q: "[069] [헌터X헌터]크라피카가 환영여단에게만 사용하기로 맹세한, 심장에 감긴 사슬 기술의 이름은?", a: ["심판하는 소지의 사슬", "저지먼트 체인", "Judgment Chain"], hint: "조건을 어기면 심장을 찔러 죽음에 이르게 합니다." },
-    { q: "[070] [헌터X헌터]환영여단(거미)의 단장으로, 타인의 능력을 훔치는 '도적의 극의'를 사용하는 인물은?", a: ["클로로", "클로로 루실후르", "쿠로로", "Chrollo"], hint: "역십자 문양이 그려진 코트를 입고 다니는 냉철한 리더입니다." }
+    { q: "[043] [헌터X헌터] 키르아의 동생(혹은 형제)으로, 무엇이든 들어주는 '조르기'와 '명령' 능력을 가진 인물은?", a: ["아르카", "아르카 조르딕", "나니카", "Alluka"], hint: "키르아가 목숨을 걸고 가문에서 데려온 소중한 존재입니다." },
+    { q: "[044] [헌터X헌터] 그리드 아일랜드(G.I)에서 곤과 키르아의 수행을 도운, 귀여운 외모 속에 근육질 본모습을 숨긴 스승은?", a: ["비스케", "비스킷", "비스킷 크루거", "Bisky"], hint: "변화계 능력자로, '매지컬 에스테' 능력을 사용합니다." },
+    { q: "[045] [헌터X헌터] 개미편에서 왕 메르엠과 '군기'를 두며 교감을 나누었던 눈먼 소녀의 이름은?", a: ["코무기", "Komugi"], hint: "군기의 세계 챔피언으로, 왕의 심경 변화에 큰 영향을 미칩니다." },
+    { q: "[046] [헌터X헌터] 네테로 회장의 넨 능력으로, 거대한 불상을 소환해 공격하는 기술의 이름은?", a: ["백식관음", "햐쿠시키칸논"], hint: "기도를 통해 공격의 기점을 만드는 강력한 방어 및 공격기입니다." },
+    { q: "[047] [헌터X헌터] 곤의 필살기인 '짜잔권(자잔켄)' 중 전신 발산형 공격에 해당하는 계통은?", a: ["방출계", "파", "Paper"], hint: "손바닥을 펴서 장풍처럼 넨을 쏘아냅니다." },
+    { q: "[048] [헌터X헌터] 키르아가 신속(간무루) 상태에서 사용하는 기술로, 적의 살기에 반응해 몸이 자동으로 움직이는 것은?", a: ["질풍신뢰", "싯푸진라이"], hint: "뇌의 명령을 거치지 않고 신경계로 직접 반응하는 초고속 회피/반격기입니다." },
+    { q: "[049] [헌터X헌터] 환영여단의 멤버 중, 시체나 물건의 '복사본'을 만드는 능력을 가진 인물은?", a: ["콜토피", "코르토피", "Kortopi"], hint: "긴 머리카락으로 얼굴을 가리고 있으며, 여단 내에서 비전투원 역할을 주로 수행합니다." },
+    { q: "[050] [헌터X헌터] 헌터 시험관 중 한 명이자 암살 가문의 집사로, 코인(동전)을 총알처럼 던지는 인물은?", a: ["고토", "Gotoh"], hint: "키르아를 매우 아끼던 조르딕 가문의 집사장급 인물입니다." },
+    { q: "[051] [헌터X헌터] 개미편의 키메라 앤트 중, 왕의 3전사 중 하나로 '테르프시코라'라는 꼭두각시 능력을 쓰는 자는?", a: ["피트", "네페르피트", "Pitou"], hint: "고양이의 모습을 한 특질계 능력자로, 카이토를 죽음에 이르게 했습니다." },
+    { q: "[052] [헌터X헌터] 카이토가 사용하는 넨 능력으로, 1번부터 9번까지 무작위로 무기가 정해지는 능력의 이름은?", a: ["미친 피에로", "크레이지 슬롯", "Crazy Slots"], hint: "피에로 모양의 장치가 입을 열어 무기를 뱉어냅니다." },
+    { q: "[053] [헌터X헌터] 조르딕 가문의 저택 입구에 있는, 무게에 따라 열리는 거대한 문의 이름은?", a: ["시험의 문", "황천의 문", "Testing Gate"], hint: "암살 가문의 일원이 되기 위해 반드시 열어야 하는 문입니다." },
+    { q: "[054] [헌터X헌터] 그리드 아일랜드의 최종 보스격 인물로, 폭탄을 설치하는 '게더' 능력을 사용한 자는?", a: ["겐스루", "폭탄마", "보머", "Genthru"], hint: "해방(리리스)이라는 키워드로 폭발을 일으킵니다." },
+    { q: "[055] [헌터X헌터] 네테로 회장이 죽기 직전 사용한, 몸 안에 심어둔 소형 핵병기의 이름은?", a: ["미니어처 로즈", "가난한 자의 장미", "The Rose"], hint: "엄청난 살상력과 함께 강력한 독성(방사능)을 지닌 무기입니다." },
+    { q: "[056] [헌터X헌터] 환영여단 내에서 고문을 담당하며, '태양(라이징 선)'이라는 강력한 광역 공격기를 쓰는 인물은?", a: ["페이탄", "페이탄 포토오", "Feitan"], hint: "검은 옷에 가려진 얼굴과 낮은 목소리가 특징인 변화계 능력자입니다." },
+    { q: "[057] [헌터X헌터] 요크신 시티 경매에서 크라피카가 지켰던, 사람의 신체 일부를 수집하는 고용주의 딸은?", a: ["네온", "네온 노스트라드", "Neon"], hint: "백 퍼센트 적중하는 시 쓰기 예언 능력을 가지고 있었습니다." },
+    { q: "[058] [헌터X헌터] 넨의 4대 행 중, 몸 밖으로 흐르는 기를 멈추어 가두는 기술은?", a: ["절", "제츠", "Zetsu"], hint: "기척을 숨기거나 피로를 회복할 때 사용합니다." },
+    { q: "[059] [헌터X헌터] 헌터 시험 287기에서 합격한 인물로, 곤, 키르아, 쿠라피카와 함께 합격한 나머지 한 명은?", a: ["레오리오", "레오리오 파라디나이트", "Leorio"], hint: "의사가 되기 위해 헌터가 되려는 의리파 청년입니다." },
+    { q: "[060] [헌터X헌터] 암흑 대륙에서 온 오행(五害) 중 하나로, 안개상 생물인 '가스 생명체'의 이름은?", a: ["아이", "Ai"], hint: "나니카의 정체로 추정되는 생명체입니다." },
+    { q: "[061] [헌터X헌터] 메르엠을 지키는 3전사 중 한 명으로, 수많은 눈을 만들고 날개 가루로 최면을 거는 인물은?", a: ["푸후", "샤와푸후", "Pouf"], hint: "바이올린을 연주하며 왕에게 절대적인 충성을 보입니다." },
+    { q: "[062] [헌터X헌터] 천공격투장에서 히소카가 사용한 기술로, 넨을 얇은 실처럼 만들어 고무와 껌의 성질을 갖게 하는 것은?", a: ["번지껌", "Bungee Gum"], hint: "히소카가 어린 시절 좋아했던 풍선껌 이름에서 따왔습니다." },
+    { q: "[063] [헌터X헌터] 진 프릭스가 제작한 게임 '그리드 아일랜드'를 플레이하기 위해 필요한 게임기 이름은?", a: ["조이스테이션", "Joystation"], hint: "현실 세계에는 단 100대만 존재하는 희귀한 게임기입니다." },
+    { q: "[064] [헌터X헌터] 환영여단 멤버 중 실을 사용하여 상처를 꿰매거나 적을 구속하는 인물은?", a: ["마치", "마치 코마치네", "Machi"], hint: "히소카의 팔을 고쳐준 적이 있는 냉정한 성격의 여성입니다." },
+    { q: "[065] [헌터X헌터] 넨 능력 중 자신의 오라를 문장이나 조건으로 바꾸어 타인에게 강요하는 기술을 무엇이라 하는가?", a: ["제약과 서약", "제약", "서약"], hint: "쿠라피카가 환영여단을 상대하기 위해 사용한 방식입니다." },
+    { q: "[066] [헌터X헌터] 곤의 아버지 진 프릭스가 속했던, 헌터 협회의 간부 모임의 명칭은?", a: ["십이지", "준이신", "Zodiacs"], hint: "네테로 회장이 인정한 12명의 정예 헌터들입니다." },
+    { q: "[067] [헌터X헌터] 키메라 앤트 편에서 곤이 피트를 쓰러뜨리기 위해 강제로 성장했을 때의 팬들 사이 별명은?", a: ["곤육몬", "어른 곤", "제약 곤"], hint: "엄청난 길이의 머리카락과 근육질 몸매가 특징입니다." },
+    { q: "[068] [헌터X헌터] 히소카의 등 번호이자, 헌터 시험 당시 그가 달고 있던 번호표의 숫자는?", a: ["44", "44번"], hint: "죽음을 상징하는 숫자와 연관이 깊습니다." },
+    { q: "[069] [헌터X헌터] 크라피카가 환영여단에게만 사용하기로 맹세한, 심장에 감긴 사슬 기술의 이름은?", a: ["심판하는 소지의 사슬", "저지먼트 체인", "Judgment Chain"], hint: "조건을 어기면 심장을 찔러 죽음에 이르게 합니다." },
+    { q: "[070] [헌터X헌터] 환영여단(거미)의 단장으로, 타인의 능력을 훔치는 '도적의 극의'를 사용하는 인물은?", a: ["클로로", "클로로 루실후르", "쿠로로", "Chrollo"], hint: "역십자 문양이 그려진 코트를 입고 다니는 냉철한 리더입니다." }
 ];
 
 //  런타임 상태
@@ -864,6 +863,40 @@ bot.addListener(Event.MESSAGE, function (msg) {
             msg.reply("✅ 해시↔닉네임 매핑을 초기화했어요.\n(다음 채팅 수신 전까지 닉네임 검색이 작동하지 않습니다.)"); return;
         }
 
+        if (content === "!!멤버통계") {
+            loadAll();
+            var allKeys = [], hk;
+            for (hk in userData) {
+                if (userData.hasOwnProperty(hk)) allKeys.push(hk);
+            }
+            if (!allKeys.length) { msg.reply("저장된 유저 데이터가 없습니다."); return; }
+
+            allKeys.sort(function (a, b) {
+                var pa = userData[a] ? (userData[a].point || 0) : 0;
+                var pb = userData[b] ? (userData[b].point || 0) : 0;
+                return pb - pa;
+            });
+
+            var dmOut = "📦 전체 멤버 raw 데이터 (" + allKeys.length + "명)\n";
+            var ki;
+            for (ki = 0; ki < allKeys.length; ki++) {
+                var hki = allKeys[ki];
+                ensureUser(hki);
+                var uki = userData[hki];
+                var avgi = calcAvgRank(hki);
+                dmOut += "———————————————\n"
+                    + "[" + (ki + 1) + "] " + nameOf(hki) + "\n"
+                    + "hash: " + hki + "\n"
+                    + "점수: " + uki.point + " | 채팅: " + uki.chat + "\n"
+                    + "출석: " + uki.attend + "일 | 평균등수: " + (avgi === null ? "N/A" : avgi.toFixed(2)) + "\n"
+                    + "퀴즈정답: " + uki.quizCorrect + "\n"
+                    + "뽑기: " + uki.drawCount + "회 (" + (uki.drawDate || "-") + ")\n"
+                    + "마지막채팅: " + (uki.lastChatAt || "없음") + "\n"
+                    + "출석등수기록: [" + (uki.attendRanks || []).join(", ") + "]\n";
+            }
+            msg.reply(dmOut); return;
+        }
+
         if (content === "!!전체초기화") {
             userData = {};
             attendance = { dateKey: getTodayKey(), list: [] };
@@ -1258,67 +1291,67 @@ bot.addListener(Event.MESSAGE, function (msg) {
     }
 });
 
-// 
-//  액티비티 이벤트
-// 
-bot.addListener(Event.ACTIVITY_CREATE, function (activity) {
+// 액티비티 이벤트
+bot.addListener("activityCreate", function (activity) {
     loadAll();
 
-    var scrollView = new android.widget.ScrollView(activity);
-    var layout = new android.widget.LinearLayout(activity);
-    layout.setOrientation(android.widget.LinearLayout.VERTICAL);
-    layout.setPadding(24, 24, 24, 24);
+    App.runOnUiThread(function () {
+        var ctx = App.getContext();
 
-    // 타이틀
-    var title = new android.widget.TextView(activity);
-    title.setText("CosBot v" + VERSION + " — 멤버 랭킹");
-    title.setTextSize(18);
-    title.setTextColor(android.graphics.Color.BLACK);
-    title.setPadding(0, 0, 0, 16);
-    layout.addView(title);
+        var scrollView = new android.widget.ScrollView(ctx);
+        var layout = new android.widget.LinearLayout(ctx);
+        layout.setOrientation(android.widget.LinearLayout.VERTICAL);
+        layout.setPadding(24, 24, 24, 24);
 
-    // 멤버 목록 (점수 내림차순)
-    var rows = buildMemberStats();
+        var title = new android.widget.TextView(ctx);
+        title.setText("CosBot v" + VERSION + " — 멤버 랭킹");
+        title.setTextSize(18);
+        title.setTextColor(android.graphics.Color.BLACK);
+        title.setPadding(0, 0, 0, 16);
+        layout.addView(title);
 
-    if (!rows.length) {
-        var empty = new android.widget.TextView(activity);
-        empty.setText("아직 멤버 데이터가 없습니다.");
-        empty.setTextColor(android.graphics.Color.DKGRAY);
-        layout.addView(empty);
-    } else {
-        var i, row, tv, medal;
-        for (i = 0; i < rows.length; i++) {
-            row = rows[i];
-            medal = (i === 0) ? "🥇 " : (i === 1) ? "🥈 " : (i === 2) ? "🥉 " : "";
+        var rows = buildMemberStats();
 
-            tv = new android.widget.TextView(activity);
-            tv.setText(
-                (i + 1) + "위 " + medal + row.name + "\n"
-                + "  점수: " + row.point + "점 | 채팅: " + row.chat + "개\n"
-                + "  출석: " + row.attend + "일 | 퀴즈: " + row.quizCorrect + "회\n"
-                + "  hash: " + row.hash
-            );
-            tv.setTextSize(13);
-            tv.setTextColor(android.graphics.Color.DKGRAY);
-            tv.setPadding(0, 8, 0, 8);
+        if (!rows.length) {
+            var empty = new android.widget.TextView(ctx);
+            empty.setText("아직 멤버 데이터가 없습니다.");
+            empty.setTextColor(android.graphics.Color.DKGRAY);
+            layout.addView(empty);
+        } else {
+            var i, row, tv, medal, divider, lp;
+            for (i = 0; i < rows.length; i++) {
+                row = rows[i];
+                medal = (i === 0) ? "🥇 " : (i === 1) ? "🥈 " : (i === 2) ? "🥉 " : "";
 
-            // 구분선
-            var divider = new android.widget.View(activity);
-            divider.setBackgroundColor(android.graphics.Color.LTGRAY);
-            var lp = new android.widget.LinearLayout.LayoutParams(
-                android.widget.LinearLayout.LayoutParams.MATCH_PARENT, 1
-            );
-            divider.setLayoutParams(lp);
+                tv = new android.widget.TextView(ctx);
+                tv.setText(
+                    (i + 1) + "위 " + medal + row.name + "\n"
+                    + "  점수: " + row.point + "점 | 채팅: " + row.chat + "개\n"
+                    + "  출석: " + row.attend + "일 | 퀴즈: " + row.quizCorrect + "회\n"
+                    + "  hash: " + row.hash
+                );
+                tv.setTextSize(13);
+                tv.setTextColor(android.graphics.Color.DKGRAY);
+                tv.setPadding(0, 8, 0, 8);
 
-            layout.addView(tv);
-            layout.addView(divider);
+                divider = new android.widget.View(ctx);
+                divider.setBackgroundColor(android.graphics.Color.LTGRAY);
+                lp = new android.widget.LinearLayout.LayoutParams(
+                    android.widget.LinearLayout.LayoutParams.MATCH_PARENT, 1
+                );
+                divider.setLayoutParams(lp);
+
+                layout.addView(tv);
+                layout.addView(divider);
+            }
         }
-    }
 
-    scrollView.addView(layout);
-    activity.setContentView(scrollView);
+        scrollView.addView(layout);
+        activity.setContentView(scrollView);  // setContentView는 activity 객체로
+    });
 });
-bot.addListener(Event.ACTIVITY_START, function () { });
-bot.addListener(Event.ACTIVITY_RESUME, function () { });
-bot.addListener(Event.ACTIVITY_PAUSE, function () { });
-bot.addListener(Event.ACTIVITY_STOP, function () { });
+
+bot.addListener("activityStart", function () { });
+bot.addListener("activityResume", function () { });
+bot.addListener("activityPause", function () { });
+bot.addListener("activityStop", function () { });
