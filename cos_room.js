@@ -239,6 +239,10 @@ var todayQuizDateKey = "";
 var todayQuizOrder = [];  // QUIZ_BANK 인덱스 배열 (당일 시드 셔플)
 var usedQuizIds = {};  // { idx → true }
 
+// 퀴즈 일일 진행 횟수 (하루 최대 10문제)
+var quizDailyDateKey = "";
+var quizDailyCount = 0;
+
 // 
 //  유틸: 날짜/시간
 // 
@@ -412,6 +416,42 @@ function medalOf(rank) {
 }
 
 // 
+//  뽑기 (자동 출석 시 5회 진행)
+// 
+function gachaRoll() {
+    var roll = Math.random() * 100; // 0 ~ 100
+    if (roll < 0.1) return { grade: "ANOTHER GRADE", point: 200 };
+    if (roll < 1.1) return { grade: "1등", point: 100 };
+    if (roll < 6.1) return { grade: "2등", point: 20 };
+    if (roll < 16.1) return { grade: "3등", point: 10 };
+    if (roll < 36.1) return { grade: "4등", point: 5 };
+    return { grade: "꽝", point: 0 };
+}
+
+function doGachaBatch(hash) {
+    ensureUser(hash);
+    var u = userData[hash];
+    var results = [], i, r, totalPoint = 0;
+    for (i = 1; i <= 5; i++) {
+        r = gachaRoll();
+        totalPoint += r.point;
+        results.push({ round: i, grade: r.grade, point: r.point });
+    }
+    u.point += totalPoint;
+    u.drawCount = (u.drawCount || 0) + 5;
+    u.drawDate = getTodayKey();
+    return { results: results, totalPoint: totalPoint };
+}
+
+function formatGachaResults(results) 
+    var out = "", i;
+    for (i = 0; i < results.length; i++) {
+        out += "뽑기 " + results[i].round + "회차: " + results[i].grade + (i < results.length - 1 ? "\n" : "");
+    }
+    return out;
+}
+
+// 
 //  출석 평균 등수 계산
 // 
 function calcAvgRank(hash) {
@@ -459,6 +499,15 @@ function ensureTodayQuizOrder() {
     usedQuizIds = {};
 }
 
+// 하루 퀴즈 진행 횟수 리셋 체크
+function ensureQuizDailyCount() {
+    var today = getTodayKey();
+    if (quizDailyDateKey !== today) {
+        quizDailyDateKey = today;
+        quizDailyCount = 0;
+    }
+}
+
 function isQuizTime() {
     var mins = new Date().getHours() * 60 + new Date().getMinutes();
     return mins <= 23 * 60 + 30;  // 00:00 ~ 23:30
@@ -466,23 +515,34 @@ function isQuizTime() {
 
 function startQuizRound(msg) {
     var remaining, i, idx, pick, normAnswers, j;
+
+    // 조건 1: 시간 제한
     if (!isQuizTime()) {
         msg.reply("⏰ 지금은 퀴즈 가능 시간이 아닙니다.\n[퀴즈 가능 시간] 매일 00:00 ~ 23:30");
         return;
     }
+
+    // 조건 2: 하루 10회 제한
+    ensureQuizDailyCount();
+    if (quizDailyCount >= 10) {
+        msg.reply("📦 오늘의 퀴즈 10문제를 모두 사용했습니다.\n내일 다시 도전해 주세요!");
+        return;
+    }
+
     if (quizActive) {
         msg.reply("이미 퀴즈가 진행 중입니다.\n'정답 (내용)' 으로 정답을 제출하세요!");
         return;
     }
 
+    // 조건 3: 잔여 문제 풀 10개 미만이면 차단
     ensureTodayQuizOrder();
     remaining = [];
     for (i = 0; i < todayQuizOrder.length; i++) {
         idx = todayQuizOrder[i];
         if (!usedQuizIds[idx]) remaining.push(idx);
     }
-    if (remaining.length < 5) {
-        msg.reply("📦 오늘 남은 문제가 5개 미만이라 퀴즈를 종료합니다.\n내일 다시 도전해 주세요!");
+    if (remaining.length < 10) {
+        msg.reply("📦 오늘 남은 문제 풀이 10개 미만이라 퀴즈를 종료합니다.\n내일 다시 도전해 주세요!");
         return;
     }
 
@@ -496,8 +556,9 @@ function startQuizRound(msg) {
     quizActive = true;
     quizAnswered = {};
     usedQuizIds[idx] = true;
+    quizDailyCount += 1;
 
-    msg.reply("🧩 퀴즈 시작!\nQ. " + currentQuiz.q + "\n\n[ 정답 (내용) | !힌트 | !종료 ]");
+    msg.reply("🧩 퀴즈 시작! (오늘 " + quizDailyCount + "/10)\nQ. " + currentQuiz.q + "\n\n[ 정답 (내용) | !힌트 | !종료 ]");
 }
 
 function stopQuiz(msg, text) {
@@ -648,7 +709,7 @@ function deleteUserByName(query, msg) {
 }
 
 // 
-//  관리자: 대리 출석
+//  관리자: 대리 출석 (뽑기 미적용 — 관리자 임의처리이므로 자동뽑기 대상 아님)
 // 
 function proxyAttendByName(query, msg) {
     var hashes = findHashesByName(query);
@@ -974,11 +1035,13 @@ bot.addListener(Event.MESSAGE, function (msg) {
             msg.reply(displayName + " 님은 이미 출석하셨어요. 😊"); return;
         }
         var fRes = doAttend(senderHash);
+        var fGacha = doGachaBatch(senderHash);
         saveUserData(); saveAttendance();
         msg.reply(
-            displayName + " 님, " + fRes.rank + "등으로 출석 완료했어요! " + medalOf(fRes.rank) + " 🎉\n"
-            + "이번 출석으로 " + fRes.earnedPoint + "점 적립했어요.\n\n"
-            + "⚠️경고⚠️\n"
+            displayName + " 님,\n"
+            + fRes.rank + "등으로 출석으로 " + fRes.earnedPoint + "점 적립했어요!\n\n"
+            + formatGachaResults(fGacha.results)
+            + "\n\n⚠️경고⚠️\n"
             + "강제출석명령을 사용하셨습니다.\n"
             + "자동 출석을 우선으로 사용하여야 하며,\n자동 출석이 불가피한 경우 반드시 이한님께 말씀해주세요."
         );
@@ -988,10 +1051,12 @@ bot.addListener(Event.MESSAGE, function (msg) {
     //  자동 출석 
     if (isAttendanceTime() && !isAdmin && !hasAttendedToday(senderHash)) {
         var aRes = doAttend(senderHash);
+        var aGacha = doGachaBatch(senderHash);
         saveUserData(); saveAttendance();
         msg.reply(
-            displayName + " 님, " + aRes.rank + "등으로 출석 완료했어요! " + medalOf(aRes.rank) + " 🎉\n"
-            + "이번 출석으로 " + aRes.earnedPoint + "점 적립했어요."
+            displayName + " 님,\n"
+            + aRes.rank + "등으로 출석으로 " + aRes.earnedPoint + "점 적립했어요!\n\n"
+            + formatGachaResults(aGacha.results)
         );
     }
 
@@ -1125,70 +1190,6 @@ bot.addListener(Event.MESSAGE, function (msg) {
         return;
     }
 
-    // !뽑기
-    if (content === "!뽑기") {
-        var today = getTodayKey();
-        ensureUser(senderHash);
-        var u = userData[senderHash];
-
-        if (u.drawDate !== today) {
-            u.drawCount = 0;
-            u.drawDate = today;
-        }
-
-        if (u.drawCount >= 5) {
-            msg.reply(displayName + " 님, 오늘 뽑기 횟수를 모두 사용하셨어요. 😢\n내일 다시 도전해 주세요!");
-            saveUserData();
-            return;
-        }
-
-        u.drawCount += 1;
-        var remaining = 5 - u.drawCount;
-        var roll = Math.random() * 100; // 0 ~ 100
-
-        var grade, earnedPoint, gradeMsg;
-
-        if (roll < 0.1) {
-            grade = "ANOTHER GRADE";
-            earnedPoint = 200;
-            gradeMsg = "🌟✨ ANOTHER GRADE ✨🌟\n" + displayName + " 님, 대박! 전설의 등급을 뽑으셨어요!!";
-        } else if (roll < 1.1) {
-            grade = "1등";
-            earnedPoint = 100;
-            gradeMsg = "🥇 1등 당첨!\n" + displayName + " 님, 엄청난 행운이에요!";
-        } else if (roll < 6.1) {
-            grade = "2등";
-            earnedPoint = 20;
-            gradeMsg = "🥈 2등 당첨!\n" + displayName + " 님, 꽤 괜찮은 행운이에요!";
-        } else if (roll < 16.1) {
-            grade = "3등";
-            earnedPoint = 10;
-            gradeMsg = "🥉 3등 당첨!\n" + displayName + " 님, 좋은 결과네요!";
-        } else if (roll < 36.1) {
-            grade = "4등";
-            earnedPoint = 5;
-            gradeMsg = displayName + " 님, 4등 당첨!\n작은 행운이 찾아왔어요.";
-        } else {
-            grade = "5등 (꽝)";
-            earnedPoint = 0;
-            gradeMsg = displayName + " 님 😔 꽝...\n다음엔 좋은 결과가 있을 거예요!";
-        }
-
-        u.point += earnedPoint;
-        saveUserData();
-
-        var resultMsg = gradeMsg + "\n\n";
-        if (earnedPoint > 0) {
-            resultMsg += "획득 점수: +" + earnedPoint + "점\n";
-        } else {
-            resultMsg += "(채팅 점수만 적립됩니다)\n";
-        }
-        resultMsg += "오늘 남은 뽑기 횟수: " + remaining + "회";
-
-        msg.reply(resultMsg);
-        return;
-    }
-
     // !뽑기확률
     if (content === "!뽑기확률") {
         msg.reply(
@@ -1201,7 +1202,7 @@ bot.addListener(Event.MESSAGE, function (msg) {
             + "4등 – 20% (+5점)\n"
             + "5등 – 63.9% (꽝, 채팅 점수만 적립)\n"
             + "———————————————\n"
-            + "하루 최대 5회 도전 가능"
+            + "매일 아침 출석 시 자동으로 5회 진행됩니다."
         );
         return;
     }
@@ -1231,7 +1232,7 @@ bot.addListener(Event.MESSAGE, function (msg) {
             + " • !팀코 – 팀코 모집 정보\n"
             + " • !모집양식 – 트윈/팀코 홍보신청양식\n\n"
             + "출석하기\n"
-            + " • 아침에 채팅치면 자동으로 출석! 🎉\n"
+            + " • 아침에 채팅치면 자동으로 출석 + 뽑기 5회! 🎉\n"
             + " • !출석랭킹 – 오늘 출석 순서 📋\n"
             + " • !출석통계 – 누적 출석일수 + 평균등수 📊\n\n"
             + "나와 남을 아는 시간\n"
@@ -1241,9 +1242,8 @@ bot.addListener(Event.MESSAGE, function (msg) {
             + "랜덤의 맛\n"
             + " • !밥 / !디저트 – 음식 추천 🍽️🍰\n"
             + " • !명언 / !운세 – 명언 또는 오늘의 운세 🔮\n"
-            + " • !뽑기 – 행운 뽑기 🎰 (하루 5회)\n"
-            + " • !뽑기확률 – 당첨 확률 고지\n\n"
-            + "퀴즈\n"
+            + " • !뽑기확률 – 출석 뽑기 당첨 확률 고지\n\n"
+            + "퀴즈 (하루 10문제 한정)\n"
             + " • !퀴즈 – 퀴즈 시작\n"
             + " • !퀴즈랭킹 – 퀴즈 정답 누적 랭킹 🏆\n\n"
             + "문제 발생 시 관리자에게 문의해주세요.\n"
