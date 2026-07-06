@@ -443,7 +443,7 @@ function doGachaBatch(hash) {
     return { results: results, totalPoint: totalPoint };
 }
 
-function formatGachaResults(results) 
+function formatGachaResults(results) {
     var out = "", i;
     for (i = 0; i < results.length; i++) {
         out += "뽑기 " + results[i].round + "회차: " + results[i].grade + (i < results.length - 1 ? "\n" : "");
