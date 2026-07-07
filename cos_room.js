@@ -446,7 +446,7 @@ function doGachaBatch(hash) {
 function formatGachaResults(results) {
     var out = "", i;
     for (i = 0; i < results.length; i++) {
-        out += "뽑기 " + results[i].round + "회차: " + results[i].grade + (i < results.length - 1 ? "\n" : "");
+        out += "뽑기 " + results[i].round + "회차: " + results[i].grade + " (" + results[i].point + "점)" + (i < results.length - 1 ? "\n" : "");
     }
     return out;
 }
@@ -1040,8 +1040,9 @@ bot.addListener(Event.MESSAGE, function (msg) {
         msg.reply(
             displayName + " 님,\n"
             + fRes.rank + "등으로 출석으로 " + fRes.earnedPoint + "점 적립했어요!\n\n"
-            + formatGachaResults(fGacha.results)
-            + "\n\n⚠️경고⚠️\n"
+            + formatGachaResults(fGacha.results) + "\n"
+            + "총 " + (fRes.earnedPoint + fGacha.totalPoint) + "점 적립했어요.\n\n"
+            + "⚠️경고⚠️\n"
             + "강제출석명령을 사용하셨습니다.\n"
             + "자동 출석을 우선으로 사용하여야 하며,\n자동 출석이 불가피한 경우 반드시 이한님께 말씀해주세요."
         );
@@ -1056,7 +1057,8 @@ bot.addListener(Event.MESSAGE, function (msg) {
         msg.reply(
             displayName + " 님,\n"
             + aRes.rank + "등으로 출석으로 " + aRes.earnedPoint + "점 적립했어요!\n\n"
-            + formatGachaResults(aGacha.results)
+            + formatGachaResults(aGacha.results) + "\n"
+            + "총 " + (aRes.earnedPoint + aGacha.totalPoint) + "점 적립했어요."
         );
     }
 
